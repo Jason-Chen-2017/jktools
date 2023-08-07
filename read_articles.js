@@ -48,6 +48,11 @@ while (true) {
     let articleId = articleIds[randomIndex];
     console.log(articleId);
     var url = 'https://blog.csdn.net/universsky2015/article/details/' + articleId;
-    open(url, '_self');
+    try {
+        open(url, '_self');
+    } catch (error) {
+        console.log('An error occurred while opening the URL:', error);
+    }
+
     sleep(Math.floor(Math.random() * 2000 + 1000));
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iChat</title>
+</head>
+<body>
+
+
+<!--2.引入SDK-->
+<script type="text/javascript" async src="https://sophon-bot.fn.bytedance.net/main.js"></script>
+
+<script>
+    // 1.定义机器人配置参数
+    window.__sophon_bot_params__ = {
+        tenantId: "316",
+        appId: "OvZFv8L1",
+        appSecret: "82a101ec401bfeed803c83be695e5ff453df5faa",
+        accessToken: "OvZFv8L1:82a101ec401bfeed803c83be695e5ff453df5faa",
+        env: 'cn', // "环境: 'cn'(默认), 'boe', 'staging' ",
+        botTitle: "iChat' ",
+        theme: 'blue'// "选填，主题颜色: 'sophon'(默认),'purple','green','blue','pink','yellow'"
+    };
+    // 引入后，可直接点击右下角Icon打开聊天窗。
+    // 也可在业务组件的点击事件中调用openBot方法唤起机器人，接收string类型参数作为起始问题。如：
+    window.__sophon_bot_params__.openBot('最近7天销售额');
+</script>
+
+
+</body>
+</html>

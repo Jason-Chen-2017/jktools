@@ -1,0 +1,7 @@
+{
+  "name": "jktools",
+  "version": "1.0.0",
+  "dependencies": {
+    "@gradio/client": "^0.4.1"
+  }
+}

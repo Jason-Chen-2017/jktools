@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GoJS DAG Graph Example</title>
+    <script src="https://unpkg.com/gojs/release/go.js"></script>
+    <style>
+        .NodePanel {
+            width: 20%;
+            height: 100%;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid #999;
+            text-align: left;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="myDiagram" style="width: 500px; height: 500px;"></div>
+
+<script>
+    // 创建 GoJS 图形实例
+    var $ = go.GraphObject.make;
+
+    var myDiagram = $(go.Diagram, "myDiagram");
+
+    // 创建节点模板
+    myDiagram.nodeTemplate =
+        $(go.Node, "Auto",
+            $(go.Shape, "Rectangle", {fill: "lightblue", stroke: "gray", strokeWidth: 2}),
+            $(go.TextBlock, {margin: 8}, new go.Binding("text", "key")),
+            {
+                click: function (e, obj) {
+                    // 在这里显示表单或执行其他操作
+                    showPanel(e, obj)
+                }
+            }
+        );
+
+    // 创建边模板
+    myDiagram.linkTemplate =
+        $(go.Link,
+            $(go.Shape),
+            $(go.Shape, {toArrow: "Standard"})
+        );
+
+    // 创建图形数据
+    var nodeDataArray = [
+        {key: "Node1"},
+        {key: "Node2"},
+        {key: "Node3"}
+    ];
+
+    var linkDataArray = [
+        {from: "Node1", to: "Node2"},
+        {from: "Node2", to: "Node3"}
+    ];
+
+    // 将数据绑定到图形
+    myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+
+    // 运行布局算法
+    myDiagram.layout = $(go.LayeredDigraphLayout);
+
+    function showPanel(e, obj) {
+        // 获取要插入表单的目标<div>元素
+        var targetDiv = document.getElementById("NodePanel");
+        targetDiv.style.display='block';
+    }
+
+
+</script>
+
+
+<div class="NodePanel" id="NodePanel">
+    <h2>节点配置</h2>
+    <form>
+        <label for="node-name">节点名称:</label>
+        <input type="text" id="node-name" name="node-name"><br><br>
+
+        <label for="node-type">节点类型:</label>
+        <select id="node-type" name="node-type">
+            <option value="type1">类型1</option>
+            <option value="type2">类型2</option>
+            <option value="type3">类型3</option>
+        </select><br><br>
+
+        <label for="input-params">节点输入参数:</label>
+        <textarea id="input-params" name="input-params" rows="4" cols="40"></textarea><br><br>
+
+        <label for="output-params">节点输出参数:</label>
+        <textarea id="output-params" name="output-params" rows="4" cols="40"></textarea><br><br>
+
+        <label for="rpc-config">节点RPC配置:</label>
+        <textarea id="rpc-config" name="rpc-config" rows="4" cols="40"></textarea><br><br>
+
+        <input type="submit" value="提交">
+    </form>
+</div>
+
+</body>
+</html>
